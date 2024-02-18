@@ -1,0 +1,511 @@
+// variables and style mixins
+$my-gray: #4d4d4d;
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+@mixin button($bcg-color, $border-settings, $box-padding, $border-hover-settings, $bcg-hover-color) {
+  button {
+    color: $my-gray;
+    background-color: $bcg-color;
+    border: $border-settings;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+    padding: $box-padding;
+    cursor: pointer;
+    transition: .2s linear;
+    -webkit-transition: .2s linear;
+    -moz-transition: .2s linear;
+    -ms-transition: .2s linear;
+    -o-transition: .2s linear;
+    font-size: 16px;
+    &:hover {
+      border: $border-hover-settings;
+      background-color: $bcg-hover-color;
+    }
+  }
+}
+
+@mixin sectionName($align, $margin, $pad-bottom) {
+  .section-name {
+    font-weight: bold;
+    font-size: clamp(16px, 5vw ,46px);
+    color: $my-gray;
+    width: 330px;
+    text-align: $align;
+    margin: $margin;
+    padding-bottom: $pad-bottom;
+    & span {
+      border-top: 4px solid #000;
+      padding-top: 19px;
+    }
+  }
+}
+a,button {
+  cursor: pointer;
+  transition: .2s linear;
+  -webkit-transition: .2s linear;
+  -moz-transition: .2s linear;
+  -ms-transition: .2s linear;
+  -o-transition: .2s linear;
+}
+
+textarea {
+  resize: none
+}
+
+.scroll-to-top {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 2px;
+  -webkit-border-radius: 2px;
+  -moz-border-radius: 2px;
+  -ms-border-radius: 2px;
+  -o-border-radius: 2px;
+  border: 1px solid;
+  transition: .2s linear;
+  -webkit-transition: .2s linear;
+  -moz-transition: .2s linear;
+  -ms-transition: .2s linear;
+  -o-transition: .2s linear;
+  &:hover {
+    opacity: .3;
+  }
+}
+// reset styles
+html {
+  scroll-behavior: smooth;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Asap, 'sans-serif';
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  text-decoration: none;
+  border: 0;
+  outline: none;
+}
+
+.container {
+  max-width: 1170px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+//! Header + Hero(Intro) section start ====================================
+.Hero {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url('./assets/hero-bcg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
+
+  .Header {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+
+    &-logo img {
+      width: 95%;
+    }
+
+    @media screen and (max-width: 600px) {
+      .Header__nav {
+        gap: 14px;
+      }
+    }
+
+    &__nav {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 35px;
+
+      & a {
+        font-size: clamp(4px, 5vw, 16px);
+        transition: .2s linear;
+        -webkit-transition: .2s linear;
+        -moz-transition: .2s linear;
+        -ms-transition: .2s linear;
+        -o-transition: .2s linear;
+        padding-bottom: 10px;
+        border-bottom: 2px solid transparent;
+        color: $my-gray;
+        &:hover {
+          border-bottom: 2px solid $my-gray;
+        }
+      }
+    }
+  }
+
+  &__block {
+    @include flex-column();
+    height: calc(100vh - 100px);
+    justify-content: center;
+
+    .title {
+      font-size: 90px;
+      font-weight: normal;
+      color: $my-gray;
+    }
+
+    .info {
+      font-size: 22px;
+      color: $my-gray;
+      opacity: .7;
+      padding: 22px 0 33px 0;
+    }
+
+    .buttons {
+      font-size: 16px;
+      display: flex;
+      gap: 20px;
+
+      @include button(rgba(255,255,255, .5), 1px solid transparent, 20px 30px, 1px solid #000, transparent);
+    }
+  }
+}
+//! Header + Hero(Intro) section end ====================================
+
+//! About section start ====================================
+.About {
+  width: 100%;
+  height: 100%;
+  padding: 115px 0;
+  &__inner {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  @media screen and (max-width: 1000px) {
+    &__inner {
+      justify-content: center;
+      gap: 50px;
+      img {
+        width: clamp(150px, 80vw, 800px)
+      }
+    }
+  }
+  &__info {
+    @include sectionName('', '', '');
+
+    .About-text {
+      font-size: 16px;
+      font-weight: normal;
+      color: $my-gray;
+      width: 410px;
+      line-height: 1.6;
+      padding-bottom: 35px;
+    }
+
+    @include button(#fff, 1px solid #000, 17px 47px, '', #e0e0e0);
+  }
+}
+//! About section end ====================================
+
+//! Services section start ====================================
+.Services {
+  width: 100%;
+  height: 100%;
+  padding: 115px 0;
+  background-color: #f6f6f6;
+  
+  @include sectionName(center, 0 auto, 55px);
+
+  &__inner {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 200px;
+    row-gap: 80px;
+    & .item {
+      text-align: center;
+      flex: 0 0 calc(33.33% - 200px);
+      @include flex-column();
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+
+      &__title {
+        color: #4d4d4d;
+        font-size: 14px;
+      }
+    }
+  }
+
+}
+//! Services section end ====================================
+
+//! Skills section start ====================================
+.Skills {
+  width: 100%;
+  height: 100%;
+  padding: 115px 0;
+  background-color: #fff;
+  
+  @include sectionName(center, 0 auto, 55px);
+}
+//! Skills section end ====================================
+
+//! Portfolio section start ====================================
+.Portfolio {
+  width: 100%;
+  height: 100%;
+  padding: 115px 0;
+  background-color: #f6f6f6;
+  
+  @include sectionName(center, 0 auto, 55px);
+
+  &__inner {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    & .item {
+      cursor: pointer;
+      flex: 0 0 calc(33.33% - 200px);
+      position: relative;
+      &:hover::after {
+        content: ">";
+        background-color: rgba(255,255,255, .5);
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        top: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 27.8px;
+        color: #000;
+        font-weight: bold;
+      }
+    }
+  }
+  & .container {
+    text-align: center;
+    button {
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 25px;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    @include button(#fff, none, 20px 49px, none, rgba(255,255,255, .7));
+  }
+}
+//! Portfolio section end ====================================
+
+//! Testimonials section start ====================================
+.Testimonials {
+  width: 100%;
+  height: 100%;
+  padding: 115px 0;
+  background-color: #fff;
+  
+  @include sectionName(center, 0 auto, 55px);
+
+  &__block {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 80px 127px;
+    border: 1px solid;
+    display: flex;
+    gap: 35px;
+
+    & img {
+      max-height: 200px;
+    }
+
+    &-info {
+      @include flex-column();
+
+      .name {
+        font-size: 30px;
+        color: #212121;
+      }
+
+      .subtitle {
+        padding-bottom: 23px;
+        font-size: 12px;
+        font-style: italic;
+        color: #212121;
+
+      }
+
+      .text {
+        color: #212121;
+        font-size: 16px;
+      }
+    }
+  }
+}
+//! Testimonials section end ====================================
+
+//! Funfact section start ====================================
+.Funfact {
+  width: 100%;
+  height: 100%;
+  padding: 115px 0;
+  background-color: #f6f6f6;
+
+  &__inner {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: end;
+    flex-wrap: wrap;
+    row-gap: 80px;
+    column-gap: 50px;
+    & .item {
+      text-align: center;
+      flex: 0 0 calc(25% - 50px);
+      @include flex-column();
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+
+      &__subtitle {
+        font-weight: 500;
+        font-size: 30px;
+        color: #212121;
+        padding-top: 32px;
+      }
+
+      &__title {
+        color: #212121;
+        font-size: 22px;
+        font-weight: 300;
+      }
+    }
+  }
+
+}
+//! Funfact section end ====================================
+
+//! Footer section start ====================================
+.Footer {
+  width: 100%;
+  height: 100%;
+  background-image: url('./assets/contact-bg.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding-top: 120px;
+
+  .Contacts {
+    width: 100%;
+    height: 100%;
+    padding-bottom: 55px;
+    @include sectionName(center, 0, 70px);
+  .Contacts-name {
+    margin: 0 auto;
+    color: #f6f6f6;
+    span {
+      border-color: #f6f6f6;
+    }
+  }
+
+    & .container {
+      max-width: 800px;
+    }
+    & form {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 30px;
+      & input {
+        font-size: 16px;
+        padding: 23px 10px;
+        width: calc(50% - 40px); /* 50% width for each input with some spacing */
+        // margin-bottom: 30px;
+      }
+      & textarea {
+        font-size: 16px;
+        width: 100%;
+        padding: 23px 10px;
+        height: 210px;
+      }
+
+      textarea::placeholder, input::placeholder {
+        color: #4d4d4d;
+      }
+      @include button(#f6f6f6, .5ps solid, 20px 32px, '', rgba(255,255,255, .5));
+      & button {
+        font-weight: 300;
+        margin: 0 auto;
+      }
+
+    }
+  }
+
+  &__block {
+    display: flex;
+    padding: 30px 0;
+    border-top: 2px solid #fff;
+    justify-content: space-around;
+    & .social {
+      margin-right: auto;
+      display: flex;
+      gap: 9px;
+      & a {
+        position: relative;
+        z-index: 1000;
+        width: 26.25px;
+        height: 26.25px;
+        font-size: 26px !important;
+        cursor: pointer;
+        color: #fff;
+        &:nth-child(1):hover {
+          color: blue;
+        }
+        &:nth-child(2):hover {
+          color: black;
+        }
+        &:nth-child(3):hover {
+          color: rgb(0, 234, 255);
+        }
+        &:nth-child(4):hover {
+          color: rgb(255, 51, 0);
+        }
+        &:nth-child(5):hover {
+          color: rgb(229, 255, 0);
+        }
+        &:nth-child(6):hover {
+          color: rgb(9, 255, 0);
+        }
+        
+      }
+    }
+
+    & .copyright {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      position: absolute;
+      left: 0;
+      color: #f6f6f6;
+    }
+  }
+}
+//! Footer section end ====================================
