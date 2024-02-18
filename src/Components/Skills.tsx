@@ -41,7 +41,7 @@ const Skills: React.FC = () => {
       y: {
         min: 5,
         max: 10,
-        ticks: { stepSize: 2 },
+        ticks: { stepSize: 1 },
       },
     },
   };
