@@ -139,7 +139,7 @@ body {
       gap: 35px;
 
       & a {
-        font-size: clamp(4px, 5vw, 16px);
+        font-size: clamp(4px, 2vw, 16px);
         transition: .2s linear;
         -webkit-transition: .2s linear;
         -moz-transition: .2s linear;
@@ -161,7 +161,7 @@ body {
     justify-content: center;
 
     .title {
-      font-size: 90px;
+      font-size: clamp(35px, 10vw, 90px);
       font-weight: normal;
       color: $my-gray;
     }
@@ -209,7 +209,7 @@ body {
     @include sectionName('', '', '');
 
     .About-text {
-      font-size: 16px;
+      font-size: clamp(4px, 2vw, 16px);
       font-weight: normal;
       color: $my-gray;
       width: 410px;
@@ -357,7 +357,7 @@ body {
 
       .text {
         color: #212121;
-        font-size: 16px;
+        font-size: clamp(5px, 2vw, 20px);
       }
     }
   }
@@ -510,3 +510,36 @@ body {
   }
 }
 //! Footer section end ====================================
+
+
+@media screen and (max-width: 1180px) {
+  .container {
+    max-width: 800px;
+  }
+}
+
+@media screen and (max-width: 810px) {
+  .container {
+    max-width: 500px;
+  }
+  .Testimonials__block {
+    flex-direction: column;
+    padding: 30px 27px;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .container {
+    max-width: 300px;
+  }
+}
+
+@media screen and (max-width: 410px) {
+  .container {
+    max-width: 200px;
+  }
+  .Portfolio-item img {
+    width: 60%;
+    height: auto; /* Для сохранения соотношения сторон */
+  }
+}
