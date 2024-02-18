@@ -527,19 +527,3 @@ body {
     padding: 30px 27px;
   }
 }
-
-@media screen and (max-width: 510px) {
-  .container {
-    max-width: 300px;
-  }
-}
-
-@media screen and (max-width: 410px) {
-  .container {
-    max-width: 200px;
-  }
-  .Portfolio-item img {
-    width: 60%;
-    height: auto; /* Для сохранения соотношения сторон */
-  }
-}
