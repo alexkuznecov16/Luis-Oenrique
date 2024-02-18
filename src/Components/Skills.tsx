@@ -32,22 +32,18 @@ const Skills: React.FC = () => {
   };
   const options = {
     plugins: {
-      legend: false,
+      legend: { display: false }, // or whatever legend options you need
     },
     scales: {
       x: {
-        grid: {
-          display: false
-        }
+        grid: { display: false },
       },
       y: {
-        min: 5,
-        max: 10,
-        ticks: {
-          stepSize: 1
-        }
-      }
-    }
+        min: 0,
+        max: 100,
+        ticks: { stepSize: 10 },
+      },
+    },
   };
   return (
     <div id='skills' className='Skills'>

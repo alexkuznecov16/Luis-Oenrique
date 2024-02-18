@@ -13,7 +13,7 @@ const MAX_PROJECTS = 9; // Set your maximum number of projects
 
 const Portfolio: React.FC = () => {
   const [displayedProjects, setDisplayedProjects] = useState(6); // Initial number of displayed projects
-  const projects_block = React.useRef();
+  const projects_block = React.useRef<HTMLDivElement>(null);
 
   const handleShowMore = () => {
     if (displayedProjects < MAX_PROJECTS) {
@@ -25,7 +25,7 @@ const Portfolio: React.FC = () => {
         newProjectElement.className = 'Portfolio-item item';
         newProjectElement.innerHTML = `<img src=${project} alt="Project ${displayedProjects + index + 1}" />`;
 
-        projects_block.current.appendChild(newProjectElement);
+        projects_block.current?.appendChild(newProjectElement);
       });
     }
   };
