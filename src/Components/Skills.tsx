@@ -39,9 +39,9 @@ const Skills: React.FC = () => {
         grid: { display: false },
       },
       y: {
-        min: 0,
-        max: 100,
-        ticks: { stepSize: 10 },
+        min: 5,
+        max: 10,
+        ticks: { stepSize: 2 },
       },
     },
   };
