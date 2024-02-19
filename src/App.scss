@@ -1,9 +1,36 @@
 // variables and style mixins
 $my-gray: #4d4d4d;
+$my-white: #f6f6f6;
 
 @mixin flex-column {
   display: flex;
   flex-direction: column;
+}
+
+@mixin transition {
+  transition: .2s linear;
+  -webkit-transition: .2s linear;
+  -moz-transition: .2s linear;
+  -ms-transition: .2s linear;
+  -o-transition: .2s linear;
+}
+
+@mixin border-radius($user-choose) {
+  border-radius: $user-choose;
+  -webkit-border-radius: $user-choose;
+  -moz-border-radius: $user-choose;
+  -ms-border-radius: $user-choose;
+  -o-border-radius: $user-choose;
+}
+
+@mixin block-sizes($width, $height, $paddings) {
+  width: $width;
+  height: $height;
+  padding: $paddings;
+}
+
+@mixin border($border-settings) {
+  border: $border-settings;
 }
 
 @mixin button($bcg-color, $border-settings, $box-padding, $border-hover-settings, $bcg-hover-color) {
@@ -11,18 +38,10 @@ $my-gray: #4d4d4d;
     color: $my-gray;
     background-color: $bcg-color;
     border: $border-settings;
-    border-radius: 2px;
-    -webkit-border-radius: 2px;
-    -moz-border-radius: 2px;
-    -ms-border-radius: 2px;
-    -o-border-radius: 2px;
+    @include border-radius(2px);
     padding: $box-padding;
     cursor: pointer;
-    transition: .2s linear;
-    -webkit-transition: .2s linear;
-    -moz-transition: .2s linear;
-    -ms-transition: .2s linear;
-    -o-transition: .2s linear;
+    @include transition();
     font-size: 16px;
     &:hover {
       border: $border-hover-settings;
@@ -48,11 +67,7 @@ $my-gray: #4d4d4d;
 }
 a,button {
   cursor: pointer;
-  transition: .2s linear;
-  -webkit-transition: .2s linear;
-  -moz-transition: .2s linear;
-  -ms-transition: .2s linear;
-  -o-transition: .2s linear;
+  @include transition();
 }
 
 textarea {
@@ -67,17 +82,9 @@ textarea {
   font-size: 24px;
   padding: 16px;
   background-color: #fff;
-  border-radius: 2px;
-  -webkit-border-radius: 2px;
-  -moz-border-radius: 2px;
-  -ms-border-radius: 2px;
-  -o-border-radius: 2px;
-  border: 1px solid;
-  transition: .2s linear;
-  -webkit-transition: .2s linear;
-  -moz-transition: .2s linear;
-  -ms-transition: .2s linear;
-  -o-transition: .2s linear;
+  @include border-radius(2px);
+  @include border(1px solid);
+  @include transition();
   &:hover {
     opacity: .3;
   }
@@ -97,7 +104,7 @@ body {
   padding: 0;
   margin: 0;
   text-decoration: none;
-  border: 0;
+  @include border(0);
   outline: none;
 }
 
@@ -109,8 +116,7 @@ body {
 
 //! Header + Hero(Intro) section start ====================================
 .Hero {
-  width: 100%;
-  min-height: 100vh;
+  @include block-sizes(100%, 100vh, '');
   background-image: url('./assets/hero-bcg.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -159,6 +165,9 @@ body {
     @include flex-column();
     height: calc(100vh - 100px);
     justify-content: center;
+    @media screen and (max-width: 900px) {
+      text-align: center;
+    }
 
     .title {
       font-size: clamp(35px, 10vw, 90px);
@@ -177,6 +186,9 @@ body {
       font-size: 16px;
       display: flex;
       gap: 20px;
+      @media screen and (max-width: 900px) {
+        margin: 0 auto;
+      }
 
       @include button(rgba(255,255,255, .5), 1px solid transparent, 20px 30px, 1px solid #000, transparent);
     }
@@ -186,9 +198,7 @@ body {
 
 //! About section start ====================================
 .About {
-  width: 100%;
-  height: 100%;
-  padding: 115px 0;
+  @include block-sizes(100%, 100%, 115px 0);
   &__inner {
     display: flex;
     align-items: center;
@@ -224,10 +234,8 @@ body {
 
 //! Services section start ====================================
 .Services {
-  width: 100%;
-  height: 100%;
-  padding: 115px 0;
-  background-color: #f6f6f6;
+  @include block-sizes(100%, 100%, 115px 0);
+  background-color: $my-white;
   
   @include sectionName(center, 0 auto, 55px);
 
@@ -247,7 +255,7 @@ body {
       gap: 15px;
 
       &__title {
-        color: #4d4d4d;
+        color: $my-gray;
         font-size: 14px;
       }
     }
@@ -258,9 +266,7 @@ body {
 
 //! Skills section start ====================================
 .Skills {
-  width: 100%;
-  height: 100%;
-  padding: 115px 0;
+  @include block-sizes(100%, 100%, 115px 0);
   background-color: #fff;
   
   @include sectionName(center, 0 auto, 55px);
@@ -269,10 +275,8 @@ body {
 
 //! Portfolio section start ====================================
 .Portfolio {
-  width: 100%;
-  height: 100%;
-  padding: 115px 0;
-  background-color: #f6f6f6;
+  @include block-sizes(100%, 100%, 115px 0);
+  background-color: $my-white;
   
   @include sectionName(center, 0 auto, 55px);
 
@@ -319,9 +323,7 @@ body {
 
 //! Testimonials section start ====================================
 .Testimonials {
-  width: 100%;
-  height: 100%;
-  padding: 115px 0;
+  @include block-sizes(100%, 100%, 115px 0);
   background-color: #fff;
   margin-top: 1px;
   
@@ -331,9 +333,13 @@ body {
     max-width: 850px;
     margin: 0 auto;
     padding: 80px 127px;
-    border: 1px solid;
+    padding-bottom: 100px;
+    @include border(1px solid);
     display: flex;
     gap: 35px;
+    @media screen and (max-width: 900px) {
+      width: 300px;
+    }
 
     & img {
       max-height: 200px;
@@ -360,16 +366,18 @@ body {
         font-size: clamp(5px, 2vw, 20px);
       }
     }
+    @media screen and (max-width: 810px) {
+      flex-direction: column;
+      padding: 30px 27px;
+    }
   }
 }
 //! Testimonials section end ====================================
 
 //! Funfact section start ====================================
 .Funfact {
-  width: 100%;
-  height: 100%;
-  padding: 115px 0;
-  background-color: #f6f6f6;
+  @include block-sizes(100%, 100%, 115px 0);
+  background-color: $my-white;
 
   &__inner {
     display: flex;
@@ -406,23 +414,20 @@ body {
 
 //! Footer section start ====================================
 .Footer {
-  width: 100%;
-  height: 100%;
+  @include block-sizes(100%, 100%, '');
   background-image: url('./assets/contact-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
   padding-top: 120px;
 
   .Contacts {
-    width: 100%;
-    height: 100%;
-    padding-bottom: 55px;
+    @include block-sizes(100%, 100%, 0 0 55px 0);
     @include sectionName(center, 0, 70px);
   .Contacts-name {
     margin: 0 auto;
-    color: #f6f6f6;
+    color: $my-white;
     span {
-      border-color: #f6f6f6;
+      border-color: $my-white;
     }
   }
 
@@ -434,11 +439,18 @@ body {
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 30px;
+      @media screen and (max-width: 600px) {
+        justify-content: center;
+        flex-wrap: wrap;
+        flex-direction: column;
+      }
       & input {
         font-size: 16px;
         padding: 23px 10px;
-        width: calc(50% - 40px); /* 50% width for each input with some spacing */
-        // margin-bottom: 30px;
+        width: calc(50% - 40px);
+        @media screen and (max-width: 600px) {
+          width: 100%;
+        }
       }
       & textarea {
         font-size: 16px;
@@ -448,14 +460,19 @@ body {
       }
 
       textarea::placeholder, input::placeholder {
-        color: #4d4d4d;
+        color: $my-gray;
       }
       @include button(#f6f6f6, .5ps solid, 20px 32px, '', rgba(255,255,255, .5));
       & button {
         font-weight: 300;
         margin: 0 auto;
       }
-
+      @media screen and (max-width: 550px) {
+        & textarea, & input {
+          width: 80%;
+          margin: 0 auto;
+        }
+      }
     }
   }
 
@@ -468,6 +485,10 @@ body {
       margin-right: auto;
       display: flex;
       gap: 9px;
+      flex-wrap: wrap;
+      @media screen and (max-width: 600px) {
+        margin: 0;
+      }
       & a {
         position: relative;
         z-index: 1000;
@@ -506,24 +527,15 @@ body {
       position: absolute;
       left: 0;
       color: #f6f6f6;
+      @media screen and (max-width: 600px) {
+        position: relative;
+      }
+    }
+    @media screen and (max-width: 600px) {
+      align-items: center;
+      flex-direction: column;
+      gap: 8px;
     }
   }
 }
 //! Footer section end ====================================
-
-
-@media screen and (max-width: 1180px) {
-  .container {
-    max-width: 800px;
-  }
-}
-
-@media screen and (max-width: 810px) {
-  .container {
-    max-width: 500px;
-  }
-  .Testimonials__block {
-    flex-direction: column;
-    padding: 30px 27px;
-  }
-}
